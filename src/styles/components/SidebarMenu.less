@@ -1,0 +1,43 @@
+@sidebar-primary-color: #272c33;
+
+.ant-layout-sider-light,
+.ant-layout-sider-collapsed {
+  background-color: @sidebar-primary-color;
+}
+
+.ant-menu {
+  background-color: @sidebar-primary-color;
+  &:not(.ant-menu-horizontal) {
+    .ant-menu-item-selected {
+      background-color: @sidebar-primary-color;
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}
+
+.ant-menu-item {
+  background-color: @sidebar-primary-color !important;
+  width: 100% !important;
+  color: #878787;
+  &:hover {
+    color: #fff;
+  }
+}
+
+.ant-menu-inline,
+.ant-menu-vertical,
+.ant-menu-vertical-left {
+  border-right: none !important;
+  .ant-menu-item::after {
+    border-right: none !important;
+  }
+}
+
+.ant-drawer-content {
+  background-color: @sidebar-primary-color !important;
+  .ant-drawer-header {
+    background-color: @sidebar-primary-color !important;
+    border-bottom: none !important;
+  }
+}

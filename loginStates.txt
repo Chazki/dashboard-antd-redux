@@ -1,0 +1,36 @@
+bad email: ->
+{
+  "status": "error",
+  "message": "Este email de usuario no esta verificado",
+  "data": {
+    "code": "ERR_USR_EMAIL_NOT_VERIFIED",
+    "meta": {
+      "email": "testtoova@yopmail.com"
+    }
+  }
+}
+
+
+bad password: ->
+{
+  "status": "error",
+  "message": "La contraseña ingresada es incorrecta",
+  "data": {
+    "code": "ERR_PASSWORD_DOES_NOT_MATCH",
+    "meta": {
+      "email": "testtodova@yopmail.com"
+    }
+  }
+}
+
+bad teamUrl -> 
+{
+  "status": "error",
+  "message": "No se ha encontrado una empresa con este team url",
+  "data": {
+    "code": "ERR_ENTERPRISE_USER_NFW_TEAMURL",
+    "meta": {
+      "teamUrl": "edstagingg"
+    }
+  }
+}
