@@ -5,7 +5,7 @@ import {
   HomeOutlined,
   MailOutlined,
   SettingOutlined,
-  EditOutlined,
+  FileOutlined,
 } from "@ant-design/icons";
 
 const routes = [
@@ -24,7 +24,7 @@ const routes = [
   {
     label: "Crear Envío",
     path: "/create-shipment",
-    icon: <EditOutlined />,
+    icon: <FileOutlined />,
     component: CreateShipment,
   },
   {

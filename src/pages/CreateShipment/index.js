@@ -1,18 +1,9 @@
 import React from "react";
-import { Row } from "antd";
 
-import MarkerMap from "./components/MarkerMap";
-import Points from "./components/Points";
+import ShipmentSteps from "./components/ShipmentSteps";
 
 const CreateShipment = () => {
-  return (
-    <div style={{ width: "100%" }}>
-      <Row>
-        <Points />
-        <MarkerMap />
-      </Row>
-    </div>
-  );
+  return <ShipmentSteps />;
 };
 
 export default CreateShipment;

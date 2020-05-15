@@ -1,6 +1,6 @@
 # dashboard-antd-redux
 
-## Intructions:
+## Instructions:
 
 ### Client:
 

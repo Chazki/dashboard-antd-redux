@@ -1,18 +1,16 @@
 import React from "react";
 import { Autocomplete } from "@react-google-maps/api";
-import { Input, Button } from "antd";
-
-import { PlusOutlined } from "@ant-design/icons";
+import { Input } from "antd";
 
 const AutocompleteInput = ({
+  style = {},
   placeholder = "",
-  size = "small",
+  size = "large",
   onPlaceChanged,
   onLoad,
   onChange,
-  onClick,
   value,
-  loading = false,
+  disabled = false,
 }) => (
   <div
     style={{
@@ -23,7 +21,8 @@ const AutocompleteInput = ({
   >
     <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
       <Input
-        style={{ width: "calc(100% - 38px)" }}
+        style={style}
+        disabled={disabled}
         size={size}
         onChange={onChange}
         value={value}
@@ -31,14 +30,6 @@ const AutocompleteInput = ({
         placeholder={placeholder}
       />
     </Autocomplete>
-    <Button
-      loading={loading}
-      onClick={onClick}
-      style={{ width: "38px", position: "absolute", right: 0, top: 0 }}
-      size={size}
-      type="primary"
-      icon={<PlusOutlined />}
-    />
   </div>
 );
 

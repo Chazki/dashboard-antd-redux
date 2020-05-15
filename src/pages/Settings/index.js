@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Button, message } from "antd";
+import { Row, Col, Button, message } from "antd";
 
 import ContentCard from "../../components/ContentCard";
 import Notifications from "./Notifications";
@@ -20,25 +20,31 @@ const infoButton = <Button>Editar información</Button>;
 
 const Settings = () => {
   return (
-    <Row>
-      <ContentCard
-        xs={24}
-        md={11}
-        title="Notificaciones"
-        actions={[notificationsButton]}
-      >
-        <Notifications />
-      </ContentCard>
-      <ContentCard
-        xs={24}
-        md={13}
-        actions={[infoButton]}
-        title="Información de usuario"
-        extra={<UserAvatar />}
-      >
-        <UserInfo />
-      </ContentCard>
-    </Row>
+    <div style={{ margin: "-16px" }}>
+      <Row>
+        <Col xs={24} lg={10} style={{ padding: "16px" }}>
+          <ContentCard
+            xs={24}
+            md={11}
+            title="Notificaciones"
+            actions={[notificationsButton]}
+          >
+            <Notifications />
+          </ContentCard>
+        </Col>
+        <Col xs={24} lg={14} style={{ padding: "16px" }}>
+          <ContentCard
+            xs={24}
+            md={13}
+            actions={[infoButton]}
+            title="Información de usuario"
+            extra={<UserAvatar />}
+          >
+            <UserInfo />
+          </ContentCard>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

@@ -6,7 +6,7 @@ import ShipmentsTable from "./components/ShipmentsTable";
 
 const Shipments = () => {
   return (
-    <Row style={{ padding: "0 16px" }}>
+    <Row>
       <ShipmentsTitle />
       <ShipmentsTable />
     </Row>

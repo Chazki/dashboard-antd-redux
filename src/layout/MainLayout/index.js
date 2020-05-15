@@ -27,7 +27,7 @@ const contentStyles = {
   zIndex: 50,
   backgroundColor: "#F4F6F8",
   height: "100%",
-  padding: `${headerHeight + 32}px 16px 32px 16px`,
+  padding: `${headerHeight + 32}px 32px 32px 32px`,
   overflowY: "hidden",
   maxHeight: "100%",
   transition: ".2s",
