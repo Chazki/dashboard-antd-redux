@@ -2,24 +2,14 @@ import React from "react";
 import { Collapse, Empty, Button, Select } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import ContentCard from "../../../components/ContentCard";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  handleDrawerDropoffOption,
-  selectDropoffOption,
-  deselectDropoffOption,
-  editDropoffOption,
-} from "../../../actions";
-import EditDropoffPointDrawer from "./EditDropoffPointDrawer";
-import CreateDropoffPointDrawer from "./CreateDropoffPointDrawer";
+import { useDispatch } from "react-redux";
+import { selectDropoffOption, deselectDropoffOption } from "../../../actions";
 
 const { Panel } = Collapse;
 const { Option } = Select;
 
-const DropoffPoints = () => {
+const DropoffStep = ({ onOpenCreate, onOpenEdit, selectedList, options }) => {
   const dispatch = useDispatch();
-  const { selectedList, options, idOnEdit } = useSelector(
-    (state) => state.dropoffPoints
-  );
 
   return (
     <React.Fragment>
@@ -29,7 +19,7 @@ const DropoffPoints = () => {
           <Button
             key="createButton"
             style={{ margin: "5px" }}
-            onClick={() => dispatch(handleDrawerDropoffOption())}
+            onClick={onOpenCreate}
           >
             Crear nueva entrega
           </Button>,
@@ -52,9 +42,9 @@ const DropoffPoints = () => {
             dispatch(deselectDropoffOption(id));
           }}
         >
-          {options.map(({ name, formattedAddress, id }) => (
+          {options.map(({ id, productName, dropoffInfo }) => (
             <Option key={id} value={id}>
-              {name} - {formattedAddress}
+              {productName} - {dropoffInfo.direction}
             </Option>
           ))}
         </Select>
@@ -84,17 +74,17 @@ const DropoffPoints = () => {
                         fontSize: "18px",
                       }}
                     >
-                      {option.name}
+                      {option.productName}
                       <Button
                         style={{ marginLeft: "10px" }}
                         size="middle"
                         shape="circle"
                         icon={<EditOutlined />}
-                        onClick={() => dispatch(editDropoffOption(option.id))}
+                        onClick={() => onOpenEdit(option)}
                       />
                     </span>
                     <span style={{ fontSize: "15px" }}>
-                      {option.formattedAddress}
+                      {option.dropoffInfo.direction}
                     </span>
                   </div>
                 }
@@ -105,10 +95,8 @@ const DropoffPoints = () => {
           </Collapse>
         )}
       </ContentCard>
-      {idOnEdit !== undefined && <EditDropoffPointDrawer />}
-      <CreateDropoffPointDrawer />
     </React.Fragment>
   );
 };
 
-export default DropoffPoints;
+export default DropoffStep;

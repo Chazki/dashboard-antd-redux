@@ -5,6 +5,7 @@ import allShipmentsReducer from "./shipments";
 import pickupPointsReducer from "./pickupPoint";
 import dropoffPointsReducer from "./dropoffPoints";
 import selectVehicleReducer from "./selectVehicle";
+import getOneShipmentReducer from "./getOneShipment";
 const rootReducer = combineReducers({
   currentSession: loginUserReducer,
   shipments: allShipmentsReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   dropoffPoints: dropoffPointsReducer,
   sidebarStates: sidebarStatesReducer,
   kindOfVehicle: selectVehicleReducer,
+  getOneShipment: getOneShipmentReducer,
 });
 
 export default rootReducer;

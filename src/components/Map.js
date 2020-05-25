@@ -1,40 +1,109 @@
 import React from "react";
-import { GoogleMap } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Marker,
+  Polyline,
+  InfoBox,
+  useLoadScript,
+} from "@react-google-maps/api";
+import { googleMapsApiKey, libraries } from "../googleConfig";
 
-function Map({ width = "100%", height = "400px", children }) {
-  return (
-    <div style={{ width, height }}>
+const pickupIcon =
+  "http://s3-sa-east-1.amazonaws.com/todovadocs/docs/pin_from.png";
+const dropoffIcon =
+  "http://s3-sa-east-1.amazonaws.com/todovadocs/docs/pin_dropoff.png";
+
+const options = {
+  strokeColor: "#800080",
+  strokeOpacity: 0.8,
+  strokeWeight: 3,
+  fillColor: "#800080",
+  fillOpacity: 0.35,
+  clickable: false,
+  draggable: false,
+  editable: false,
+  visible: true,
+  radius: 30000,
+  zIndex: 1,
+};
+
+const Map = ({
+  width = "100%",
+  height = "400px",
+  style = {},
+  children,
+  pickupPoint = null,
+  dropoffPoints = null,
+  polyline = null,
+  showInfoBox = false,
+  hasMarkers = false,
+}) => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey,
+    libraries,
+  });
+
+  const getCenter = () => {
+    const bounds = new window.google.maps.LatLngBounds();
+    if (pickupPoint) bounds.extend(new window.google.maps.LatLng(pickupPoint));
+    if (dropoffPoints) {
+      dropoffPoints.forEach((coordinates) => {
+        bounds.extend(new window.google.maps.LatLng(coordinates));
+      });
+    }
+
+    return bounds.getCenter();
+  };
+
+  return isLoaded ? (
+    <div style={{ width, height, ...style }}>
       <GoogleMap
-        onLoad={(map) => {
-          const bounds = new window.google.maps.LatLngBounds();
-          bounds.extend(
-            new window.google.maps.LatLng(
-              children[0].props.position.lat,
-              children[0].props.position.lng
-            )
-          );
-          children[1].forEach(({ props: { position } }) =>
-            bounds.extend(
-              new window.google.maps.LatLng(position.lat, position.lng)
-            )
-          );
-          map.fitBounds(bounds);
-        }}
+        center={getCenter()}
         mapContainerStyle={{
           width: "100%",
           height: "100%",
           borderRadius: "5px",
         }}
         zoom={12}
-        center={{
-          lat: -12.046373,
-          lng: -77.042755,
-        }}
       >
+        {pickupPoint && <Marker icon={pickupIcon} position={pickupPoint} />}
+        {dropoffPoints &&
+          dropoffPoints.map((coordinates, index) => (
+            <Marker key={index} icon={dropoffIcon} position={coordinates} />
+          ))}
+        {showInfoBox &&
+          dropoffPoints &&
+          dropoffPoints.map((coordinates, index) => (
+            <InfoBox
+              key={index}
+              options={{
+                closeBoxURL: "",
+                alignBottom: true,
+                pixelOffset: new window.google.maps.Size(5, -20),
+              }}
+              position={coordinates}
+            >
+              <div
+                style={{
+                  backgroundColor: "#272C33",
+                  opacity: 1,
+                  padding: 5,
+                  color: "#FFF",
+                  borderRadius: 5,
+                  fontSize: 12,
+                  fontWeight: "bold",
+                }}
+              >
+                {index + 1}
+              </div>
+            </InfoBox>
+          ))}
+        {polyline && <Polyline path={polyline} options={options} />}
+
         {children}
       </GoogleMap>
     </div>
-  );
-}
+  ) : null;
+};
 
 export default Map;

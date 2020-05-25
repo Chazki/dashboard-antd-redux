@@ -1,11 +1,14 @@
 import { message } from "antd";
 
-export const getPointInfo = (address) => {
+export const getPointInfo = (location) => {
   return {
-    formattedAddress: address.getPlace().formatted_address,
-    coordinates: {
-      lat: address.getPlace().geometry.location.lat(),
-      lng: address.getPlace().geometry.location.lng(),
+    address: location.getPlace().formatted_address,
+    location: {
+      type: "Point",
+      coordinates: [
+        location.getPlace().geometry.location.lng(),
+        location.getPlace().geometry.location.lat(),
+      ],
     },
   };
 };
@@ -23,11 +26,11 @@ export const handleMessage = (type, msg) => {
   }
 };
 
-export const handlePlaceChanged = (instance, state, setState) => {
-  if (instance !== null) {
+export const handlePlaceChanged = (location, state, setState) => {
+  if (location !== null) {
     setState({
       ...state,
-      ...getPointInfo(instance),
+      ...getPointInfo(location),
     });
   }
 };

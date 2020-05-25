@@ -4,6 +4,7 @@ import * as loginUser from "./loginUser";
 import * as pickupPoint from "./pickupPoint";
 import * as dropoffPoints from "./dropoffPoints";
 import * as selectKindOfVehicle from "./selectVehicle";
+import * as getOneShipment from "./getOneShipment";
 
 export const {
   cleanSidebarStates,
@@ -25,6 +26,7 @@ export const {
   editPickupOption,
   removePickupOption,
   selectPickupOption,
+  resetPickupOption,
 } = pickupPoint;
 
 export const {
@@ -36,6 +38,16 @@ export const {
   updateDropoffOption,
   removeDropoffOption,
   cancelEditDropoffOption,
+  resetDropoffOptionsSelected,
 } = dropoffPoints;
 
-export const { selectVehicle } = selectKindOfVehicle;
+export const {
+  getOneShipmentFail,
+  getOneShipmentRequest,
+  getOneShipmentSuccess,
+  getOneShipmentAddPackage,
+  getOneShipmentRemovePackage,
+  getOneShipmentUpdatePackages,
+} = getOneShipment;
+
+export const { selectVehicle, resetVehicle } = selectKindOfVehicle;

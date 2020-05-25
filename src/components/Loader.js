@@ -10,9 +10,9 @@ const loaderStyles = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "100vw",
-  height: "100vh",
-  position: "fixed",
+  height: "100%",
+  width: "100%",
+  position: "relative",
   zIndex: 1,
   backgroundColor: "rgba(255, 255, 255, 0.1)",
 };

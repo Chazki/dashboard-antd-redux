@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Select } from "antd";
 
-import { handleDrawerPickupOption, selectPickupOption } from "../../../actions";
+import { selectPickupOption } from "../../../actions";
 import ContentCard from "../../../components/ContentCard";
-import CreatePickupPointDrawer from "./CreatePickupPointDrawer";
 
 const { Option } = Select;
 
-const PickupPoint = () => {
+const PickupStep = ({ onOpenCreate }) => {
   const dispatch = useDispatch();
   const {
     selected: { id },
@@ -26,7 +25,7 @@ const PickupPoint = () => {
             type="dashed"
             shape="circle"
             icon={<PlusOutlined />}
-            onClick={() => dispatch(handleDrawerPickupOption())}
+            onClick={onOpenCreate}
           />
         }
       >
@@ -39,14 +38,13 @@ const PickupPoint = () => {
           <Option value={-1}>Ninguna</Option>
           {options.map((point) => (
             <Option key={point.name} value={point.id}>
-              {point.name} - {point.formattedAddress}
+              {point.name} - {point.pickupInfo.direction}
             </Option>
           ))}
         </Select>
       </ContentCard>
-      <CreatePickupPointDrawer />
     </React.Fragment>
   );
 };
 
-export default PickupPoint;
+export default PickupStep;

@@ -9,12 +9,14 @@ const initialState = {
   options: [
     {
       id: new Random().number,
-      name: "test",
-      observations: "test",
-      formattedAddress: "Av Jose Larco 453-497, Miraflores 15074, Perú",
-      coordinates: {
-        lat: -12.1219256,
-        lng: -77.0306557,
+      name: "testttt",
+      pickupInfo: {
+        direction: "Av Vitacura 4200, Vitacura, Región Metropolitana, Chile",
+        landMark: "dsfsdfasd",
+        location: {
+          type: "Point",
+          coordinates: [-70.5896298, -33.3992084],
+        },
       },
     },
   ],
@@ -44,7 +46,7 @@ const pickupPointsReducer = (state = initialState, action) => {
         ...state,
         options: [
           ...state.options,
-          { ...action.point, id: new Random().number },
+          { id: new Random().number, ...action.point },
         ],
       };
     case PICKUP_OPTIONS.REMOVE:

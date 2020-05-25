@@ -1,7 +1,7 @@
 import React from "react";
 import LoginImage from "./components/LoginImage";
 import LoginForm from "./components/LoginForm";
-import Loader from "./components/Loader";
+import Loader from "../../components/Loader";
 import { useSelector } from "react-redux";
 
 const Login = () => {

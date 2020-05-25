@@ -3,6 +3,7 @@ import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
+import ShipmentDetails from "./pages/ShipmentDetails";
 // import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import privateRoutes from "./routes";
@@ -27,6 +28,12 @@ const App = () => {
           component={component}
         />
       ))}
+      <PrivateRoute
+        exact
+        path="/shipments/:shipmentId"
+        label="Detalles de envío"
+        component={ShipmentDetails}
+      />
       <Route exact path="*" component={NotFound} />
     </Switch>
   );

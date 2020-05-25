@@ -4,17 +4,31 @@ import Random from "../lib/GenerateId";
 const initialState = {
   openCreateDrawer: false,
   openEditDrawer: false,
-  idOnEdit: undefined,
+  idOnEdit: -1,
   selectedList: [],
   options: [
     {
       id: new Random().number,
-      name: "test",
-      observations: "test",
-      formattedAddress: "Av. Samuel Alcazar 620, Rímac 15094, Perú",
-      coordinates: {
-        lat: -12.028713,
-        lng: -77.0308648,
+      productName: "test",
+      dropoffInfo: {
+        direction: "Av Vitacura 4200, Vitacura, Región Metropolitana, Chile",
+        landMark: "dsfsdf",
+        location: {
+          type: "Point",
+          coordinates: [-70.5896298, -33.3992084],
+        },
+      },
+    },
+    {
+      id: new Random().number,
+      productName: "test2",
+      dropoffInfo: {
+        direction: "Av Vitacura 4200, Vitacura, Región Metropolitana, Chile",
+        landMark: "aasasdasdsad",
+        location: {
+          type: "Point",
+          coordinates: [-70.5896298, -33.3992084],
+        },
       },
     },
   ],
@@ -45,7 +59,7 @@ const dropoffPointsReducer = (state = initialState, action) => {
         ...state,
         options: [
           ...state.options,
-          { ...action.point, id: new Random().number },
+          { id: new Random().number, ...action.point },
         ],
       };
     case DROPOFF_OPTIONS.REMOVE:
@@ -56,7 +70,7 @@ const dropoffPointsReducer = (state = initialState, action) => {
     case DROPOFF_OPTIONS.EDIT:
       return { ...state, idOnEdit: action.id, openEditDrawer: true };
     case DROPOFF_OPTIONS.CANCEL_EDIT:
-      return { ...state, openEditDrawer: false };
+      return { ...state, openEditDrawer: false, idOnEdit: -1 };
     case DROPOFF_OPTIONS.UPDATE:
       return {
         ...state,

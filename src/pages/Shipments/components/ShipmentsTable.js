@@ -3,6 +3,7 @@ import { Col, Table, Form, Select, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 
 import { shipmentsRequest } from "../../../actions";
+import { useHistory } from "react-router-dom";
 
 const columns = [
   {
@@ -75,6 +76,7 @@ const popupMessage = (status, textMsg) => {
 };
 
 const ShipmentsTable = () => {
+  const history = useHistory();
   const apiKey = localStorage.getItem("apiKey");
   const roleKey = localStorage.getItem("roleKey");
   const { loading, data, filter } = useSelector((state) => state.shipments);
@@ -98,6 +100,10 @@ const ShipmentsTable = () => {
         </Form.Item>
       </Form>
       <Table
+        className="shipments-table"
+        onRow={(rowData) => ({
+          onClick: () => history.push(`/shipments/${rowData.id}`),
+        })}
         scroll={{ x: "calc(100vw - 305px)" }}
         rowKey="id"
         columns={columns}

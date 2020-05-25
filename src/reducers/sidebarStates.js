@@ -1,7 +1,7 @@
 import { SIDEBAR_STATE } from "../constants";
 
 const initialState = {
-  desktop: false,
+  desktop: true,
   mobile: false,
 };
 
