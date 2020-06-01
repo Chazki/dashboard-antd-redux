@@ -1,14 +1,14 @@
 import React from "react";
-import image from "../../../images/backgroundImg.jpg";
+import image from "../../../images/bicycle.jpeg";
 
-const backgroundOpacity = {
-  position: "relative",
-  zIndex: 20,
-  width: "100%",
-  height: "100%",
-  backgroundColor: "#272C33",
-  opacity: 0.7,
-};
+// const backgroundOpacity = {
+//   position: "relative",
+//   zIndex: 20,
+//   width: "100%",
+//   height: "100%",
+//   backgroundColor: "#272C33",
+//   opacity: 0.7,
+// };
 
 const backgroundImage = {
   position: "absolute",
@@ -25,14 +25,13 @@ const LoginImage = ({ children }) => {
   return (
     <div
       style={{
-        width: "100vw",
         height: "100vh",
         position: "relative",
         zIndex: 20,
       }}
     >
-      <div style={backgroundImage}></div>
-      <div style={backgroundOpacity}></div>
+      <div style={backgroundImage} />
+      {/* <div className="background-wrapper-form" /> */}
       <div
         style={{
           position: "absolute",
@@ -44,6 +43,16 @@ const LoginImage = ({ children }) => {
       >
         {children}
       </div>
+      <svg
+        preserveAspectRatio="none"
+        id="path-container"
+        width="100vw"
+        viewBox="0 0 1448 668"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M1448 668H0V0L730 350L1448 0V668Z" fill="#3f293e" />
+      </svg>
     </div>
   );
 };

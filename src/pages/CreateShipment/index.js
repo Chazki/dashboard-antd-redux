@@ -39,7 +39,9 @@ const CreateShipment = () => {
   const [openCreatePickupDrawer, setOpenCreatePickupDrawer] = useState(false);
   const [openCreateDropoffDrawer, setOpenCreateDropoffDrawer] = useState(false);
   const [openEditDropoffDrawer, setOpenEditDropoffDrawer] = useState(false);
+  const { selected } = useSelector((state) => state.pickupPoints);
   const { selectedList, options } = useSelector((state) => state.dropoffPoints);
+  const vehicle = useSelector((state) => state.kindOfVehicle);
 
   const handleOpenCreatePickupDrawer = () => setOpenCreatePickupDrawer(true);
   const handleCloseCreatePickupDrawer = () => setOpenCreatePickupDrawer(false);
@@ -94,28 +96,28 @@ const CreateShipment = () => {
   };
   const prevStep = () => setCurrentStep(currentStep - 1);
 
-  // const passStep = (currentStep) => {
-  //   switch (currentStep) {
-  //     case 0: {
-  //       if (currentId === -1) return true;
-  //       else return false;
-  //     }
-  //     case 1: {
-  //       if (selectedList.length === 0) return true;
-  //       else return false;
-  //     }
-  //     case 2: {
-  //       if (vehicle === "") return true;
-  //       else return false;
-  //     }
-  //     case 3:
-  //       return false;
-  //     case 4:
-  //       return false;
-  //     default:
-  //       return false;
-  //   }
-  // };
+  const passStep = (currentStep) => {
+    switch (currentStep) {
+      case 0: {
+        if (selected.id === -1) return true;
+        else return false;
+      }
+      case 1: {
+        if (selectedList.length === 0) return true;
+        else return false;
+      }
+      case 2: {
+        if (vehicle === "") return true;
+        else return false;
+      }
+      case 3:
+        return false;
+      case 4:
+        return false;
+      default:
+        return false;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -136,7 +138,7 @@ const CreateShipment = () => {
           <React.Fragment>
             {currentStep < steps.length - 1 && (
               <Button
-                // disabled={passStep(currentStep)}
+                disabled={passStep(currentStep)}
                 size="large"
                 type="primary"
                 onClick={nextStep}

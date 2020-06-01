@@ -8,40 +8,44 @@ const FormInput = ({
   rules = {},
   prefix = null,
   type,
-  placeholder,
+  label = null,
   hasFeedBack = false,
   dependencies = [],
   addonAfter = null,
   addonBefore = null,
+  size = "large",
 }) => {
   return (
-    <Form.Item
-      style={style}
-      name={name}
-      rules={rules}
-      hasFeedback={hasFeedBack}
-      dependencies={dependencies}
-    >
-      {type === "password" ? (
-        <Input.Password
-          className="input"
-          style={styleInput}
-          addonBefore={addonBefore}
-          addonAfter={addonAfter}
-          prefix={prefix}
-          placeholder={placeholder}
-        />
-      ) : (
-        <Input
-          className="inputTest"
-          style={styleInput}
-          addonBefore={addonBefore}
-          addonAfter={addonAfter}
-          prefix={prefix}
-          placeholder={placeholder}
-        />
-      )}
-    </Form.Item>
+    <React.Fragment>
+      <Form.Item
+        label={label}
+        style={style}
+        name={name}
+        rules={rules}
+        hasFeedback={hasFeedBack}
+        dependencies={dependencies}
+      >
+        {type === "password" ? (
+          <Input.Password
+            size={size}
+            className="form-input"
+            style={styleInput}
+            addonBefore={addonBefore}
+            addonAfter={addonAfter}
+            prefix={prefix}
+          />
+        ) : (
+          <Input
+            size={size}
+            className="form-input"
+            style={styleInput}
+            addonBefore={addonBefore}
+            addonAfter={addonAfter}
+            prefix={prefix}
+          />
+        )}
+      </Form.Item>
+    </React.Fragment>
   );
 };
 

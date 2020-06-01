@@ -2,11 +2,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { Form, Button, Typography, notification } from "antd";
+import { Form, Button, notification } from "antd";
 import {
-  UserOutlined,
-  LockOutlined,
-  TeamOutlined,
+  // UserOutlined,
+  // LockOutlined,
+  // TeamOutlined,
   CloseCircleFilled,
   FrownOutlined,
   SmileOutlined,
@@ -14,13 +14,12 @@ import {
 
 import FormInput from "../../../components/FormInput";
 import { loginUserRequest } from "../../../actions";
+import todovaLogo from "../../../images/todovaLogo.jpeg";
 
 notification.config({
   placement: "topRight",
   duration: 2,
 });
-
-const { Title } = Typography;
 
 const requiredRule = (string) => {
   return {
@@ -65,12 +64,12 @@ const LoginForm = () => {
 
   return (
     <div className="form-wrapper">
-      <Title className="form-title" level={1}>
-        Ingresa a tu cuenta
-      </Title>
+      <h1 className="form-title">
+        <img alt="TodoVa Logo" src={todovaLogo} />
+      </h1>
       <Form className="login-form" onFinish={onFinish}>
         <FormInput
-          hasFeedBack
+          label="USUARIO"
           name="email"
           rules={[
             requiredRule("email"),
@@ -79,34 +78,25 @@ const LoginForm = () => {
               message: "Email no válido*",
             },
           ]}
-          prefix={<UserOutlined />}
-          placeholder="Usuario"
         />
         <FormInput
-          hasFeedBack
+          label="CONTRASEÑA"
           name="password"
           rules={[requiredRule("contraseña")]}
-          prefix={<LockOutlined />}
           type="password"
-          placeholder="Contraseña"
         />
         <FormInput
-          hasFeedBack
+          label="TEAM"
           name="teamUrl"
           rules={[requiredRule("equipo")]}
-          prefix={<TeamOutlined />}
-          placeholder="Equipo"
         />
         <Form.Item
           className="submit-button-container"
-          style={{ margin: 0, textAlign: "center" }}
+          // style={{ margin: 0, textAlign: "center" }}
         >
-          <Button htmlType="submit">
+          <Button className="submit-button" htmlType="submit">
             <span className="submit-button-label">Ingresar</span>
           </Button>
-          {/* <div style={{ textAlign: "end", paddingTop: "10px" }}>
-            Or <Link to="/register">register now</Link>
-          </div> */}
         </Form.Item>
       </Form>
     </div>
