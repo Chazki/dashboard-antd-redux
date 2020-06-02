@@ -10,7 +10,7 @@ const Login = () => {
   } = useSelector((state) => state);
   return (
     <React.Fragment>
-      {loading ? (
+      {loading && (
         <div
           style={{
             width: "100vw",
@@ -21,7 +21,7 @@ const Login = () => {
         >
           <Loader />
         </div>
-      ) : null}
+      )}
       <LoginImage>
         <LoginForm />
       </LoginImage>

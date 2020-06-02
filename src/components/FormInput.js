@@ -1,51 +1,55 @@
 import React from "react";
 import { Form, Input } from "antd";
 
+const emailRule = {
+  type: "email",
+  message: "Email no válido",
+};
+
+const isRequired = () => {
+  return {
+    required: true,
+    message: "Este campo es requerido",
+  };
+};
+
 const FormInput = ({
   style = {},
   styleInput = {},
+  rules = [],
   name,
-  rules = {},
-  prefix = null,
   type,
   label = null,
-  hasFeedBack = false,
-  dependencies = [],
-  addonAfter = null,
-  addonBefore = null,
   size = "large",
+  required = false,
 }) => {
   return (
-    <React.Fragment>
-      <Form.Item
-        label={label}
-        style={style}
-        name={name}
-        rules={rules}
-        hasFeedback={hasFeedBack}
-        dependencies={dependencies}
-      >
-        {type === "password" ? (
-          <Input.Password
-            size={size}
-            className="form-input"
-            style={styleInput}
-            addonBefore={addonBefore}
-            addonAfter={addonAfter}
-            prefix={prefix}
-          />
-        ) : (
-          <Input
-            size={size}
-            className="form-input"
-            style={styleInput}
-            addonBefore={addonBefore}
-            addonAfter={addonAfter}
-            prefix={prefix}
-          />
-        )}
-      </Form.Item>
-    </React.Fragment>
+    <Form.Item
+      label={label}
+      style={style}
+      name={name}
+      rules={[
+        ...rules,
+        required && isRequired(),
+        type === "email" && emailRule,
+      ]}
+    >
+      {type === "password" ? (
+        <Input.Password
+          type={type}
+          size={size}
+          className="form-input"
+          style={styleInput}
+        />
+      ) : (
+        <Input
+          type={type}
+          size={size}
+          className="form-input"
+          style={styleInput}
+        />
+      )}
+    </Form.Item>
   );
 };
 

@@ -3,14 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { Form, Button, notification } from "antd";
-import {
-  // UserOutlined,
-  // LockOutlined,
-  // TeamOutlined,
-  CloseCircleFilled,
-  FrownOutlined,
-  SmileOutlined,
-} from "@ant-design/icons";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 
 import FormInput from "../../../components/FormInput";
 import { loginUserRequest } from "../../../actions";
@@ -18,40 +11,39 @@ import todovaLogo from "../../../images/todovaLogo.jpeg";
 
 notification.config({
   placement: "topRight",
-  duration: 2,
+  duration: 1.5,
 });
 
-const requiredRule = (string) => {
-  return {
-    required: true,
-    message: `Por favor ingrese su ${string}*`,
+const getStatusNotification = (status, description) => {
+  const notificationOpenConfig = {
+    icon: undefined,
+    style: {
+      borderRadius: "7px",
+      color: "#FFF",
+      backgroundColor: undefined,
+    },
+    description,
+    message: (
+      <div
+        style={{
+          textTransform: "capitalize",
+          fontWeight: "bold",
+          color: "#fff",
+        }}
+      >
+        {status}
+      </div>
+    ),
   };
-};
-
-const toCapitalize = (string) => {
-  return string.substring(0, 1).toUpperCase() + string.substring(1);
-};
-
-const statusNotification = (status, message) => {
-  let statusStyles = { fontWeight: "bold" };
-  let icon;
   if (status === "error") {
-    statusStyles = { ...statusStyles, color: "#e73c3c" };
-    icon = <FrownOutlined style={{ color: "#e73c3c" }} />;
+    notificationOpenConfig.style.backgroundColor = "#ff4d4f";
+    notificationOpenConfig.icon = <FrownOutlined />;
   } else if (status === "success") {
-    statusStyles = {
-      ...statusStyles,
-      color: "#39C26F",
-    };
-    icon = <SmileOutlined style={{ color: "#39C26F" }} />;
+    notificationOpenConfig.style.backgroundColor = "#39C26F";
+    notificationOpenConfig.icon = <SmileOutlined />;
   }
-  notification.open({
-    icon,
-    style: { borderRadius: "7px" },
-    closeIcon: <CloseCircleFilled />,
-    message: <div style={statusStyles}>{toCapitalize(status)}</div>,
-    description: message,
-  });
+
+  notification.open(notificationOpenConfig);
 };
 
 const LoginForm = () => {
@@ -59,41 +51,22 @@ const LoginForm = () => {
   const history = useHistory();
 
   const onFinish = (values) => {
-    dispatch(loginUserRequest(values, history, statusNotification));
+    dispatch(loginUserRequest(values, history, getStatusNotification));
   };
 
   return (
     <div className="form-wrapper">
-      <h1 className="form-title">
-        <img alt="TodoVa Logo" src={todovaLogo} />
-      </h1>
+      <img className="form-logo" alt="TodoVa Logo" src={todovaLogo} />
       <Form className="login-form" onFinish={onFinish}>
+        <FormInput required label="Team URL" name="teamUrl" type="text" />
+        <FormInput required label="Email" name="email" type="email" />
         <FormInput
-          label="USUARIO"
-          name="email"
-          rules={[
-            requiredRule("email"),
-            {
-              type: "email",
-              message: "Email no válido*",
-            },
-          ]}
-        />
-        <FormInput
-          label="CONTRASEÑA"
+          required
+          label="Contraseña"
           name="password"
-          rules={[requiredRule("contraseña")]}
           type="password"
         />
-        <FormInput
-          label="TEAM"
-          name="teamUrl"
-          rules={[requiredRule("equipo")]}
-        />
-        <Form.Item
-          className="submit-button-container"
-          // style={{ margin: 0, textAlign: "center" }}
-        >
+        <Form.Item className="submit-button-container">
           <Button className="submit-button" htmlType="submit">
             <span className="submit-button-label">Ingresar</span>
           </Button>
